@@ -34,4 +34,32 @@ class NYCDataFetcher:
         response.raise_for_status() # Raising an exception if the response code is not successful
         self.data = response.json() # Parse the JSON response and store it in the data attribute
         return self.data
+def extract_rows(self) -> list:
+        """
+        Extracts rows using column names from meta
+        :return: List of dictionaries with selected column data
+        """
+        if not self.data:
+            print("No data loaded.")
+            return []
+
+        columns = self.data.get("meta", {}).get("view", {}).get("columns", [])
+        rows = self.data.get("data", [])
+
+        if not columns or not rows:
+            print("Columns or rows missing in the JSON structure.")
+            return []
+
+        
+        column_names = [col["name"] for col in columns]
+        print(f"Detected columns: {column_names[:5]}...")  
+
+        extracted = []
+        for row in rows:
+            
+            row_data = dict(zip(column_names, row))
+            extracted.append(row_data)
+
+        return extracted
+
 
