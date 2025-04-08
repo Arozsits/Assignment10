@@ -62,4 +62,21 @@ def extract_rows(self) -> list:
 
         return extracted
 
+def save_to_csv(self, records: list, filename: str = "nyc_data.csv") -> None:
+        """
+        Saving the extracted records to a CSV file
+        """
+        if not records:
+            print("None")
+            return
+
+        keys = records[0].keys()
+        with open(filename, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=keys)
+            writer.writeheader()
+            writer.writerows(records)
+
+        print(f"Data successfully written to {filename}")
+
+
 
