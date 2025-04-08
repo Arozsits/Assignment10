@@ -8,14 +8,11 @@
 # Brief Description of the assignment:  In this assignment, we are exeuting an API call using a specfic URL that we selected.
 
 # Brief Description of what this module does. We are learning about how to incorporate API files to aggreagate data from JSON files.
-# Citations: {"Stack Overflow" is not sufficient. Provide repeatable links, book page #, etc.}
+# Citations: https://realpython.com/python-json/ , https://requests.readthedocs.io/ , https://www.w3schools.com/python/pandas/pandas_csv.asp , https://opendata.cityofnewyork.us/
 
-# Anything else that's relevant:
 
 import json
 import requests
-
-
 
 from JSONPackage.JSON import NYCDataFetcher
 
@@ -24,14 +21,14 @@ def main():
     url = 'https://data.cityofnewyork.us/api/views/xeg4-ic28/rows.json?accessType=DOWNLOAD'
     fetcher = NYCDataFetcher(url)
 
-    print("Fetching data from NYC API")
+   
     fetcher.fetch_data()
 
-    print("Extracting structured rows")
+    
     extracted = fetcher.extract_rows()
     print(f"Number of records extracted: {len(extracted)}")
 
-    # Show first few records
+    
     def pretty_print_record(record: dict):
         print(f"{record.get('Park Location', 'Unknown')} ({record.get('Borough Location', 'N/A')})")
         print(f"Week of {record.get('Week Start Date', 'N/A')} to {record.get('Week End Date', 'N/A')}")
